@@ -6,7 +6,6 @@ use cortex_m_rt::entry;
 // this imports `beginner/apps/lib.rs` to retrieve our global logger + panicking-behavior
 use apps as _;
 
-
 #[entry]
 fn main() -> ! {
     dk::init().unwrap();
