@@ -20,7 +20,7 @@ beginner = []
 
 # set defmt logging levels here
 default = [
-  "defmt-debug",
+  "defmt-info",
   # "dependency-a/defmt-trace",
 ]
 
