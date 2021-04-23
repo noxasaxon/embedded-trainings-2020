@@ -30,7 +30,7 @@ pub enum Request {
 
     /// SET_CONFIGURATION
     // see section 9.4.7 of the USB specification
-    #[cfg(TODO)]
+    // #[cfg(TODO)]
     SetConfiguration {
         /// bConfigurationValue to change the device to
         value: Option<NonZeroU8>,
@@ -154,7 +154,6 @@ mod tests {
         //                                                    ^
     }
 
-    #[cfg(TODO)]
     #[test]
     fn get_descriptor_configuration() {
         // OK: GET_DESCRIPTOR Configuration 0 [length=9]

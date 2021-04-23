@@ -1,6 +1,6 @@
 #![no_main]
 #![no_std]
-
+// https://embedded-trainings.ferrous-systems.com/setup-stage.html
 use dk::{
     peripheral::USBD,
     usbd::{self, Event},

@@ -8,7 +8,8 @@ use panic_log as _; // panic handler
 #[rtic::app(device = dk)]
 const APP: () = {
     struct Resources {
-        power: POWER, // <- resource declaration
+        power: POWER,   // <- resource declaration
+        counter: usize, // <- new resource
     }
 
     #[init]
@@ -23,6 +24,7 @@ const APP: () = {
 
         init::LateResources {
             power, // <- resource initialization
+            counter: 0,
         }
     }
 
@@ -35,16 +37,25 @@ const APP: () = {
         }
     }
 
-    #[task(binds = POWER_CLOCK, resources = [power])]
+    #[task(binds = POWER_CLOCK, resources = [power, counter])]
     //                                      ^^^^^^^ resource access list
     fn on_power_event(cx: on_power_event::Context) {
         log::info!("POWER event occurred");
 
         // resources available to this task
-        let resources = cx.resources;
+        let power: &mut POWER = cx.resources.power;
+        let counter = cx.resources.counter;
+
+        *counter += 1;
+        let n = *counter;
+        log::info!(
+            "on_power_event: cable connected {} time{}",
+            n,
+            if n != 1 { "s" } else { "" }
+        );
 
         // the POWER peripheral can be accessed through a reference
-        let power: &mut POWER = resources.power;
+        // let power: &mut POWER = resources.power;
 
         // clear the interrupt flag; otherwise this task will run again after it returns
         power.events_usbdetected.reset();

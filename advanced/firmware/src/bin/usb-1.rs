@@ -40,14 +40,12 @@ fn on_event(_usbd: &USBD, event: Event) {
     log::info!("USB: {:?} @ {:?}", event, dk::uptime());
 
     match event {
-        Event::UsbReset => todo!(),
+        Event::UsbReset => log::info!("USB: UsbReset"),
 
         Event::UsbEp0DataDone => todo!(),
         // leave this at it is for now.
-
         Event::UsbEp0Setup => {
             log::info!("goal reached; move to the next section");
-           
         }
     }
 }
